@@ -1,0 +1,53 @@
+#master-board {
+    display: flex;
+    background-color: mintcream;
+    justify-content: space-around;
+    padding: 30px;
+    border: 2px solid grey;
+}
+
+#play-board {
+    display: flex;
+    padding: 30px;
+    width: 40%;
+    border: 2px solid black;
+    background-color:blanchedalmond;
+    justify-content: space-around;
+}
+
+#hint-board {
+    display: flex;
+    padding: 30px;
+    width: 40%;
+    border: 2px solid black;
+    background-color: azure;
+    justify-content: space-around;
+}
+
+.color-button {
+    width: 30px;
+    height: 30px;
+    background-color:gainsboro;
+    color:black;
+    border: 2px solid black;
+    text-align: center;
+    cursor: pointer;
+}
+
+.hint-button {
+    width: 30px;
+    height: 30px;
+    background-color: yellow;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.dropdown {
+    position:relative;
+}
+
+.dd {
+    padding: .5rem;
+    display: none;
+    background-color: whitesmoke;
+}
