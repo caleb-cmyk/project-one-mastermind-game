@@ -8,9 +8,9 @@ const playerCombo = [];
 
 const hintCombo = [];
 
-let turnNum = 0;
+let turnNum = 1;
 
-const turnString = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"];
+const turnString = ["zeroth", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"];
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -47,13 +47,27 @@ const computerCombo = shuffle(colors).slice(0,4);
 
 const colorChoice = document.querySelectorAll(".color-dropdown");
 
-const colorSel = document.querySelectorAll(".color-selection");
+//exclusive multiple selectors: https://stackoverflow.com/questions/34001917/queryselectorall-with-multiple-conditions-in-javascript
+
+const colorSel = document.querySelectorAll(`.color-selection.${turnString[turnNum]}`);
 
 const goButtonElement = document.querySelectorAll(".go-button");
 
 const hint = document.querySelectorAll(".hint");
 
-// const test = document.querySelector("#play-board") 
+const playElements = document.querySelectorAll(".color-dropdown");
+
+const replayButtonElement = document.querySelector("#replay");
+
+const colorSelFunc = () => {
+    return document.querySelectorAll(`.color-selection.${turnString[turnNum]}`);
+};
+
+const handleReplay = () => {
+    location.reload()
+};
+
+replayButtonElement.addEventListener("click", handleReplay);
 
 const changeHint = () => {
     for (let i = 0; i < hintCombo.length; i++) {
@@ -67,18 +81,6 @@ const changeHint = () => {
     }
 };
 
-// const activePlay = () => {
-//     for (let i = 0; i < colorChoice.length; i++) {
-//         console.log(colorChoice[i].className);
-//         if (colorChoice[i].className === `color-dropdown ${turn}`) {
-//             console.log("yes!")
-//         } else {
-//             console.log("no!")
-//         }
-//     }
-// };
-
-
 const activePlay = () => {
     turn = turnString[turnNum];
     for (let i = 0; i < colorChoice.length; i++) {
@@ -90,40 +92,50 @@ const activePlay = () => {
     }
 };
 
+const checkOutcome = () => {
+    const lastFourHintCombos = hintCombo.slice(hintCombo.length -4);
+    const outcomeElement = document.querySelector("#outcome");
+    const disablePlay = () => {
+        for (let i = 0; i < playElements.length; i++) {
+            playElements[i].setAttribute("disabled", "disabled");
+        }
+    };
+    if (
+        lastFourHintCombos[0] === "match" &&
+        lastFourHintCombos[1] === "match" &&
+        lastFourHintCombos[2] === "match" &&
+        lastFourHintCombos[3] === "match"
+    ) {
+        const playElements = document.querySelectorAll(".color-dropdown");
+        for (let i = 0; i < playElements.length; i++) {
+            playElements[i].setAttribute("disabled", "disabled");
+        disablePlay();
+        outcomeElement.textContent = "YOU WINNER!";
+        }
+    } else if (turnNum === 9) {
+        disablePlay();
+        outcomeElement.textContent = "YOU LOSER!";
+    }
+};
+
 activePlay();
 
 const handleGo = () => {
-    for (let i = 0; i < 4; i++) {
-        playerCombo.push(colorSel[turnNum*4 + i].value);
+    for (let i = 0; i < colorSelFunc().length; i++) {
+        playerCombo.push(colorSelFunc()[i].value);
     }
     checkCombo();
     changeHint();
     turnNum += 1;
     activePlay();
-    console.log("turn:", turn);
+    checkOutcome();
     console.log("computer", computerCombo);
     console.log("player", playerCombo);
-    playerCombo.pop();
-    playerCombo.pop();
-    playerCombo.pop();
-    playerCombo.pop();
+    for (let i = 0; i < 4; i++) {
+        playerCombo.pop();
+    };
 };
 
 for (let i = 0; i <goButtonElement.length; i++) {
     goButtonElement[i].addEventListener("click", handleGo);
 };
-
-
-
-
-// activeChoice = document.querySelectorAll(`.${turnString[turnNum]}`);
-
-// const disablePlay = () => {
-//     for (let i = 0; i < colorChoice.length; i++) {
-//         colorChoice[i].disabled = true;
-//     };
-//     goButtonElement.disabled = true;
-// };
-
-// problems to solve:
-// player choice returns 15 elements 
