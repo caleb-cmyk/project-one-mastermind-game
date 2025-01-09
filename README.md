@@ -1,11 +1,17 @@
 <h1>Mastermind</h1>
-Mastermind's simple and addictive. Guess the colour of each of the four circles in correct order. If the circle's colour and position are correct, the hint will light up green. If the colour is one of the four correct colours but in the wrong position, the hint will light up red. If both the colour and position are wrong, the hint will not light up. Guess within the maximum number of tries and be the master.
+Mastermind's simple and addictive. Guess the colour of each of the four circles in correct order. If the circle's colour and position are correct, the hint will light up green. If the colour is one of the four correct colours but in the wrong position, the hint will light up red. If both the colour and position are wrong, the hint will not light up. Guess within the maximum number of tries and be the master. 
+<br/>
+<br/>
+
+[Mastermind here now!](https://caleb-cmyk.github.io/project-one-mastermind-game/)
 
 <h2>Project Brief</h2>
 
 <h4>Minimum Viable Product in Two Weeks</h4>
 <ul>
-  <li>Insert MVP</li>
+  <li>Working game logic</li>
+  <li>Win and lose outcomes</li>
+  <li>Restartable</li>
 </ul>
 
 <h4>Technologies Used</h4>
@@ -85,11 +91,26 @@ Mastermind's simple and addictive. Guess the colour of each of the four circles 
     // AND computer activates player actions on the next row of choices.
 ```
 
-<h3>Code Breakdown</h3>
-INSERT CODE BREAKDOWN
+<h3>Mastermind Game</h3>
+<img width="564" alt="image" src="https://github.com/user-attachments/assets/7c319ed2-5e38-4bc7-b5e0-91aa0b531237" />
+<img width="569" alt="image" src="https://github.com/user-attachments/assets/adf52878-5e52-4715-a523-8a88e35b4271" />
 
 <h2>Summary and After-Actions</h2>
-INSERT SUMMARY TEXT
+<ul>
+  <li>Dress up UX/UI</li>
+  <li>Remove ability to select colours that have already been selected as one of the options</li>
+  <li>Add difficulity levels: 
+    <ul>
+    <li>Timer</li>
+    <li>More colours</li>
+    <li>Fewer chances</li>
+    <li>More options, ie. choose 6 instead of current choose 4</li>
+  </ul>
+  <li>Scoreboard</li>
+</ul>
 
-<h2>References</h2>
-INSERT AUTHORS+SOURCES
+<h2>Attributions</h2>
+Fisher-Yates Shuffle: https://medium.com/@omar.rashid2/fisher-yates-shuffle-a2aa15578d2f
+
+Selecting with multiple conditions: https://stackoverflow.com/questions/34001917/queryselectorall-with-multiple-conditions-in-javascript
+HTML dropdown formatting: https://stackoverflow.com/questions/15755770/change-text-color-of-selected-option-in-a-select-box
