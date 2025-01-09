@@ -49,17 +49,17 @@ const playElements = document.querySelectorAll(".color-dropdown");
 
 //exclusive multiple selectors: https://stackoverflow.com/questions/34001917/queryselectorall-with-multiple-conditions-in-javascript
 
-const colorSel = document.querySelectorAll(`.color-selection.${turnString[turnNum]}`);
+// const colorSel = document.querySelectorAll(`.color-selection.${turnString[turnNum]}`);
+
+const colorSelFunc = () => {
+    return document.querySelectorAll(`.color-selection.${turnString[turnNum]}`);
+};
 
 const goButtonElement = document.querySelectorAll(".go-button");
 
 const hint = document.querySelectorAll(".hint");
 
 const replayButtonElement = document.querySelector("#replay");
-
-const colorSelFunc = () => {
-    return document.querySelectorAll(`.color-selection.${turnString[turnNum]}`);
-};
 
 const handleReplay = () => {
     location.reload()
@@ -108,28 +108,30 @@ const checkprompt = () => {
         for (let i = 0; i < playElements.length; i++) {
             playElements[i].setAttribute("disabled", "disabled");
         disablePlay();
-        promptElement.textContent = "YOU WINNER!";
+        promptElement.textContent = "YOU WIN!";
         }
     } else if (turnNum === 9) {
         disablePlay();
-        promptElement.textContent = "YOU LOSER!";
+        promptElement.textContent = "YOU LOSE!";
     }
 };
 
 activePlay();
 
+
 const handleGo = () => {
     const promptElement = document.querySelector("#prompt");
+    console.log(colorSelFunc()[0])
     if  (
         colorSelFunc()[0].value === "" ||
         colorSelFunc()[1].value === "" ||
         colorSelFunc()[2].value === "" ||
         colorSelFunc()[3].value === ""
 ) {
-    console.log("select colors");
-    promptElement.textContent = "SELECT COLORS!";
+    promptElement.textContent = "SELECT ALL COLORS!";
     return;
 };
+    console.log(colorSelFunc());
     promptElement.textContent = "";
     for (let i = 0; i < colorSelFunc().length; i++) {
         playerCombo.push(colorSelFunc()[i].value);
