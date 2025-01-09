@@ -50,3 +50,36 @@
     display: none;
     background-color: whitesmoke;
 }
+
+#replay {
+    height: 2em;
+    width: 5em;
+}
+
+.white {
+    background-color: white;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
+
+.pink {
+    background-color: pink;
+}
+
+select {
+    background-color: magenta;
+}

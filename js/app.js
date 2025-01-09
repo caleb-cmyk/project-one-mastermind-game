@@ -45,7 +45,7 @@ const computerCombo = shuffle(colors).slice(0,4);
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-const colorChoice = document.querySelectorAll(".color-dropdown");
+const playElements = document.querySelectorAll(".color-dropdown");
 
 //exclusive multiple selectors: https://stackoverflow.com/questions/34001917/queryselectorall-with-multiple-conditions-in-javascript
 
@@ -54,8 +54,6 @@ const colorSel = document.querySelectorAll(`.color-selection.${turnString[turnNu
 const goButtonElement = document.querySelectorAll(".go-button");
 
 const hint = document.querySelectorAll(".hint");
-
-const playElements = document.querySelectorAll(".color-dropdown");
 
 const replayButtonElement = document.querySelector("#replay");
 
@@ -83,18 +81,18 @@ const changeHint = () => {
 
 const activePlay = () => {
     turn = turnString[turnNum];
-    for (let i = 0; i < colorChoice.length; i++) {
-        if (colorChoice[i].classList.contains(`${turn}`)) {
-            colorChoice[i].removeAttribute("disabled");
+    for (let i = 0; i < playElements.length; i++) {
+        if (playElements[i].classList.contains(`${turn}`)) {
+            playElements[i].removeAttribute("disabled");
         } else {
-            colorChoice[i].setAttribute("disabled", "disabled");
+            playElements[i].setAttribute("disabled", "disabled");
         }
     }
 };
 
-const checkOutcome = () => {
+const checkprompt = () => {
     const lastFourHintCombos = hintCombo.slice(hintCombo.length -4);
-    const outcomeElement = document.querySelector("#outcome");
+    const promptElement = document.querySelector("#prompt");
     const disablePlay = () => {
         for (let i = 0; i < playElements.length; i++) {
             playElements[i].setAttribute("disabled", "disabled");
@@ -110,17 +108,29 @@ const checkOutcome = () => {
         for (let i = 0; i < playElements.length; i++) {
             playElements[i].setAttribute("disabled", "disabled");
         disablePlay();
-        outcomeElement.textContent = "YOU WINNER!";
+        promptElement.textContent = "YOU WINNER!";
         }
     } else if (turnNum === 9) {
         disablePlay();
-        outcomeElement.textContent = "YOU LOSER!";
+        promptElement.textContent = "YOU LOSER!";
     }
 };
 
 activePlay();
 
 const handleGo = () => {
+    const promptElement = document.querySelector("#prompt");
+    if  (
+        colorSelFunc()[0].value === "" ||
+        colorSelFunc()[1].value === "" ||
+        colorSelFunc()[2].value === "" ||
+        colorSelFunc()[3].value === ""
+) {
+    console.log("select colors");
+    promptElement.textContent = "SELECT COLORS!";
+    return;
+};
+    promptElement.textContent = "";
     for (let i = 0; i < colorSelFunc().length; i++) {
         playerCombo.push(colorSelFunc()[i].value);
     }
@@ -128,7 +138,7 @@ const handleGo = () => {
     changeHint();
     turnNum += 1;
     activePlay();
-    checkOutcome();
+    checkprompt();
     console.log("computer", computerCombo);
     console.log("player", playerCombo);
     for (let i = 0; i < 4; i++) {
